@@ -8,7 +8,7 @@ def sanitize_message(message: str) -> str:
     return cleaned_message
 
 
-def create_message_stream(message: str) -> None:
+def create_message_stream(message: str):
     """Stream a message word by word to the console."""
     words = message.split()
     for word in words:
