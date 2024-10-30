@@ -1,4 +1,5 @@
 import re
+import time
 
 def sanitize_message(message: str) -> str:
     """Sanitize a message by escaping forbidden characters."""
@@ -7,6 +8,10 @@ def sanitize_message(message: str) -> str:
     return cleaned_message
 
 
-def create_message_stream(message: str) -> str:
-    """Create a message stream from a message."""
-    return f"data: {message}\n\n"
+def create_message_stream(message: str) -> None:
+    """Stream a message word by word to the console."""
+    words = message.split()
+    for word in words:
+        yield f"data: {word}"
+        time.sleep(0.5)  # Adjust the delay as needed
+        

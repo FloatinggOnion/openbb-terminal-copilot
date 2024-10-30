@@ -64,11 +64,12 @@ async def query(request: AgentQueryRequest) -> EventSourceResponse:
             print(message)
             formatted_prompt = SYSTEM_PROMPT.format(context=message.content)
             model = genai.GenerativeModel("gemini-1.5-flash")
-            result = await model.generate_content_async(formatted_prompt)
+            result = model.generate_content(formatted_prompt)
+            result = result.text
         else:
             raise ValueError(f"Invalid role: {message.role}")
 
     return EventSourceResponse(
-        content=create_message_stream(result),
+        content=result,
         media_type="text/event-stream",
     )
