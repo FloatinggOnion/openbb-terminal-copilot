@@ -69,6 +69,7 @@ async def query(request: AgentQueryRequest) -> EventSourceResponse:
         else:
             raise ValueError(f"Invalid role: {message.role}")
 
+    print(result)
     return EventSourceResponse(
         content=result,
         media_type="text/event-stream",
